@@ -1,19 +1,19 @@
 # 🐳 Multi-Language Secure Sandbox
 
-Un sandbox seguro basado en Node.js + Docker para ejecutar código en múltiples lenguajes de programación de forma aislada.
+A secure sandbox based on Node.js + Docker to execute code in multiple programming languages in an isolated manner.
 
-## 🚀 Características
+## 🚀 Features
 
-- 🔒 Ejecución aislada con Docker (sin red)
-- ⚡ Soporta múltiples lenguajes
-- ⏱️ Timeout automático
-- 🧠 Límite de CPU, RAM y procesos
-- 📦 API REST simple
-- 🧪 Ideal para editores online, plataformas educativas o judges tipo LeetCode
+- 🔒 Isolated execution with Docker (no network)
+- ⚡ Supports multiple languages
+- ⏱️ Automatic timeout
+- 🧠 CPU, RAM and process limits
+- 📦 Simple REST API
+- 🧪 Ideal for online editors, educational platforms or LeetCode-like judges
 
-## 🧑‍💻 Lenguajes soportados
+## 🧑‍💻 Supported Languages
 
-| Lenguaje | Emoji |
+| Language | Emoji |
 |----------|-------|
 | Python | 🐍 |
 | Node.js | 🟢 |
@@ -26,7 +26,7 @@ Un sandbox seguro basado en Node.js + Docker para ejecutar código en múltiples
 
 ## 📡 API
 
-### Ejecutar código
+### Execute code
 
 **Endpoint:** `POST /run`
 
@@ -34,64 +34,64 @@ Un sandbox seguro basado en Node.js + Docker para ejecutar código en múltiples
 ```json
 {
     "language": "python",
-    "code": "print('Hola mundo')"
+    "code": "print('Hello world')"
 }
 ```
 
-**Respuesta:**
+**Response:**
 ```json
 {
-    "stdout": "Hola mundo",
+    "stdout": "Hello world",
     "stderr": "",
     "exitCode": 0
 }
 ```
 
-### Ejemplos con curl
+### Examples with curl
 
 ```bash
 # Python
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"python","code":"print(\"Hola mundo\")"}'
+    --data-binary '{"language":"python","code":"print(\"Hello world\")"}'
 
 # Node.js
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"nodejs","code":"console.log(\"Hola mundo\")"}'
+    --data-binary '{"language":"nodejs","code":"console.log(\"Hello world\")"}'
 
 # PHP
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"php","code":"<?php echo \"Hola mundo\"; ?>"}'
+    --data-binary '{"language":"php","code":"<?php echo \"Hello world\"; ?>"}'
 
 # Ruby
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"ruby","code":"puts \"Hola mundo\""}'
+    --data-binary '{"language":"ruby","code":"puts \"Hello world\""}'
 
 # C
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"c","code":"#include <stdio.h>\nint main(){printf(\"Hola mundo\");}"}'
+    --data-binary '{"language":"c","code":"#include <stdio.h>\nint main(){printf(\"Hello world\");}"}'
 
 # C++
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"cpp","code":"#include <iostream>\nint main(){std::cout << \"Hola mundo\";}"}'
+    --data-binary '{"language":"cpp","code":"#include <iostream>\nint main(){std::cout << \"Hello world\";}"}'
 
 # Java
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"java","code":"public class Main { public static void main(String[] args){ System.out.println(\"Hola mundo\"); } }"}'
+    --data-binary '{"language":"java","code":"public class Main { public static void main(String[] args){ System.out.println(\"Hello world\"); } }"}'
 
 # SQL
 curl -X POST http://localhost:4000/run \
     -H "Content-Type: application/json" \
-    --data-binary '{"language":"sql","code":"SELECT \"Hola mundo\";"}'
+    --data-binary '{"language":"sql","code":"SELECT \"Hello world\";"}'
 ```
 
-## 🧱 Arquitectura
+## 🧱 Architecture
 
 ```
 Client
@@ -105,37 +105,31 @@ Execution (language runtime)
 stdout / stderr
 ```
 
-## 🔒 Seguridad
+## 🔒 Security
 
-Este sandbox aplica varias restricciones:
+This sandbox applies several restrictions:
 
-- 🚫 Sin red (`--network none`)
-- 📁 Sistema de archivos de solo lectura
-- 🧼 `/tmp` aislado con tmpfs
-- 👤 Usuario no root (1000:1000)
-- 💾 128MB RAM por contenedor
-- 🧵 CPU limitada (0.5 cores)
-- 🔥 Timeout de ejecución (10s)
-- 🚫 Límite de procesos (pids)
+- 🚫 No network (`--network none`)
+- 📁 Read-only filesystem
+- 🧼 Isolated `/tmp` with tmpfs
+- 👤 Non-root user (1000:1000)
+- 💾 128MB RAM per container
+- 🧵 Limited CPU (0.5 cores)
+- 🔥 Execution timeout (10s)
+- 🚫 Process limit (pids)
 
-> ⚠️ **Advertencia:** Esto es un sandbox educativo/experimental. No está diseñado para ejecutar código no confiable en producción sin auditoría adicional.
+> ⚠️ **Warning:** This is an educational/experimental sandbox. It is not designed to execute untrusted code in production without additional audit.
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
 ```bash
-git clone https://github.com/tuusuario/sandbox
+git clone https://github.com/youruser/sandbox
 cd sandbox
 npm install
-docker pull python:3.12-alpine
-docker pull node:18-alpine
-docker pull php:8.3-cli-alpine
-docker pull ruby:3-alpine
-docker pull gcc:13
-docker pull eclipse-temurin:21-jdk
-docker pull keinos/sqlite3
+npm run prepare
 ```
 
-## ▶️ Ejecución
+## ▶️ Execution
 
 ```bash
 node server.js
@@ -143,15 +137,15 @@ node server.js
 
 **Endpoint:** `http://localhost:4000/run`
 
-## 💡 Ideas futuras
+## 💡 Future Ideas
 
-- Streaming de stdout en tiempo real
-- Cola de ejecución (Redis/BullMQ)
-- Autenticación con API keys
-- Límites por usuario
-- Soporte para más lenguajes (Go, Rust, TypeScript)
-- UI tipo Replit/LeetCode runner
+- Real-time stdout streaming
+- Execution queue (Redis/BullMQ)
+- API key authentication
+- Per-user limits
+- Support for more languages (Go, Rust, TypeScript)
+- Replit/LeetCode runner-like UI
 
-## 🧑‍🚀 Autor
+## 🧑‍🚀 Author
 
-Hecho con ❤️ usando Node.js + Docker
+Made with ❤️ using Node.js + Docker
