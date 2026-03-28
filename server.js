@@ -25,6 +25,8 @@ const DOCKER_FLAGS = [
   "--read-only",
   "--tmpfs",
   "/tmp:rw,noexec,nosuid,size=64m",
+  "--tmpfs",
+  "/tmp/out:rw,exec,nosuid,size=32m",
   "--workdir",
   "/tmp",
   "--user",
@@ -81,7 +83,7 @@ process.stdin.on('end', () => {
     args: [
       "sh",
       "-c",
-      "cat > /tmp/main.c && gcc /tmp/main.c -o /tmp/a.out && /tmp/a.out",
+      "cat > /tmp/main.c && gcc /tmp/main.c -o /tmp/out/a.out && /tmp/out/a.out",
     ],
   },
 
@@ -90,7 +92,7 @@ process.stdin.on('end', () => {
     args: [
       "sh",
       "-c",
-      "cat > /tmp/main.cpp && g++ /tmp/main.cpp -o /tmp/a.out && /tmp/a.out",
+      "cat > /tmp/main.cpp && g++ /tmp/main.cpp -o /tmp/out/a.out && /tmp/out/a.out",
     ],
   },
 
@@ -99,7 +101,7 @@ process.stdin.on('end', () => {
     args: [
       "sh",
       "-c",
-      "cat > /tmp/Main.java && javac /tmp/Main.java && java -cp /tmp Main",
+      "cat > /tmp/Main.java && javac -d /tmp/out /tmp/Main.java && java -cp /tmp/out Main",
     ],
   },
 
