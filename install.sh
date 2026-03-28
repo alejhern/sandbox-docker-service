@@ -7,3 +7,4 @@ docker pull ruby:3-alpine
 docker pull gcc:13
 docker pull eclipse-temurin:21-jdk
 docker pull keinos/sqlite3
+docker pull bash:5-alpine3.20

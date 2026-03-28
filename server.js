@@ -78,6 +78,11 @@ process.stdin.on('end', () => {
     args: ["ruby", "-e", "eval(STDIN.read)"],
   },
 
+  bash: {
+    image: "bash:5-alpine3.20",
+    args: ["bash", "-s"],
+  },
+
   c: {
     image: "gcc:13",
     args: [
