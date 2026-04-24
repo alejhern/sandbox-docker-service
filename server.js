@@ -8,7 +8,7 @@ const crypto = require("crypto");
 const { spawn } = require("child_process");
 
 const app = express();
-
+app.disable("x-powered-by");
 app.use(cors());
 app.use(express.json({ limit: "64kb" }));
 
